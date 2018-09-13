@@ -167,6 +167,41 @@ $2\t$1
     - Note that this syntax will run the replacement and
 
 
+## In-class Assignment - Thurs., Sept. 13th - The Origin of Species
+
+- Copy the text of the entire [Origin of Species](http://www.gutenberg.org/cache/epub/2009/pg2009.txt) and save it in a text file.
+
+- Open your copy of the Origin in Atom (or you can use command-line tools like grep and sed)
+
+- Now answer these questions about the text. Each time you try a search with a regular expression, look through some of the results to make sure it's finding what you intend. In a file, record both the answer to the question and the regular expression or Terminal command you used.
+
+  1. How many times is the name Darwin referenced? And how many different people with that name?
+
+  2. How many times does Darwin use the term "evolution" or some closely related word (e.g., "evolutionist")? Note that the word can start a sentence (i.e., Evolution...) or be in the middle of a sentence (i.e., evolution...).
+
+  3. How many times does Darwin write some character (any one other than whitespace), followed by a period, followed by another character (not whitespace)?
+
+  4. Darwin is known for his copious commas. Can you find the single line in this file that has 9 commas?
+
+  5. How many blocks of text are in this file (any lines separated by at least one blank line)?
+
+  6. How many times (in total) does Darwin use the Roman numeral for 5 (v, V), 6 (vi, VI), 7 (vii, VII), and 8 (viii, VIII)? You can assume that he always terminates these with a period. (e.g., vi.)
+
+  7. Let's say you want to get a better sense for how Darwin discusses selection throughout the book. As a way to start, you'd like to extract all lines from the book that contain the word selection. Use grep to do this.
+
+    a. Now write a single Terminal command to count the number of these lines. (Hint: use pipes and the word count command.)
+
+    b. Now write a single Terminal command to view only the 20th-30th lines with selection in them. (Hint: use pipes, head, and tail.)
+
+  8. Darwin often delimits lists with double dashes (--). Let's say you're editing a new version of this text and you'd like to use a single dash with spaces on either side (e.g., " - ") instead. Write a sed command to do this.
+
+  9. Now let's say that in your new version, you'd like to anonymize all the names that follow titles (Mr., Ms., Mrs., Dr.). So, Dr. Brown would become Dr. B. Write regular expressions to do this. Note that these names may be in any of these forms: Dr. Brown, Dr. J. Brown, Dr. J.M. Brown, or Dr. Jeremy Brown. Hint: try converting 2nd, 3rd, and 4th forms to the first form to start. Then do the anonymization. Remember that the names may occur in the middle or at the end of a sentence.
+
+  10. [BONUS PRACTICE] Extract all the lines in the file that contain Dr. using grep, then pipe the output through sed to remove all characters before Dr. In this way, you can easily see what names are being referenced.
+
+  11. [BONUS PRACTICE] How many quotations (text inside pairs of quotation marks) are used in the entire text? This includes quotations that wrap over multiple lines. Note: if you're like me, you'll need to Google for help with this.
+
+
 ## Week 4 Assignment (Due Tuesday, Sept. 18th by 1:30)
 
 For this assignment, we are going to use temperature data from some Swedish sub-arctic lakes (https://bolin.su.se/data/Crill-2015). We'll focus on 3 files that include temperature measurements from June 11th, 2009 until June 2nd, 2010.
