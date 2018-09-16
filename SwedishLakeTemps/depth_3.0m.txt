@@ -1,0 +1,3 @@
+Strdln_Twater_090611-090828_corrd.csv:MH_Time-MH_DOY-MH_0.1dm-MH_0.3dm-MH_0.5dm-MH_1.0dm-MH_3.0dm-MH_5.0dm-MH_7dm-IH_Time-IH_DOY-IH_0.1dm-IH_0.3dm-IH_0.5dm-IH_1.0dm-IH_3.0dm-IH_5.0dm_
+Strdln_Twater_090829-091012_corrd.csv:MH_Time-MH_DOY-MH_0.1dm-MH_0.3dm-MH_0.5dm-MH_1.0dm-MH_3.0dm-MH_5.0dm-MH_7dm-IH_Time-IH_DOY-IH_0.1dm-IH_0.3dm-IH_0.5dm-IH_1.0dm-IH_3.0dm-IH_5.0dm-_
+Strdln_Twater_091015-100602_corrd.csv:MH_Time-MH_DOY-MH_0.1dm-MH_0.3dm-MH_0.5dm-MH_1.0dm-MH_3.0dm-MH_5.0dm-MH_7dm-IH_Time-IH_DOY-IH_0.1dm-IH_0.3dm-IH_0.5dm-IH_1.0dm-IH_3.0dm-IH_5.0dm-_
