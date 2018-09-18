@@ -1,0 +1,25 @@
+1.
+2.
+-a) Find: ;  Replace: \t
+-b) Find: ( ) Replace: NaN
+-c) There are still empty fields. I think an empty fields that are left over are tabs and returns
+-d) Find: \s$ Replace: (nothing)
+-e) Find: (\w+_\d+\.\d+) Replace: $1_
+-f) Find: NaN Replace: (delete)
+-g) Find (\d\.\d)\d+ Replace: $1
+
+3.
+grep 2009 Strdln_Twater_091015-100602_corrd.csv >> 2009Samples.txt (repeat for all 3)
+
+4. 
+grep -E \d Strdln_Twater_091015-100602_corrd.csv >> completeLakeTemps.txt (repeat for all)
+
+5. 
+grep -E "d01" Strdln_Twater_090611-090828_corrd.csv Strdln_Twater_090829-091012_corrd.csv Strdln_Twater_091015-100602_corrd.csv >> SemiMonthlyLakeTemps.txt
+grep -E "d15" Strdln_Twater_090611-090828_corrd.csv Strdln_Twater_090829-091012_corrd.csv Strdln_Twater_091015-100602_corrd.csv >> SemiMonthlyLakeTemps.txt
+
+6. 
+grep -E "06:00" Strdln_Twater_090611-090828_corrd.csv Strdln_Twater_090829-091012_corrd.csv Strdln_Twater_091015-100602_corrd.csv >> NightTimeLakeTemps.txt (repeat for each hour)
+
+7.
+grep -E "0.1dm" Strdln_Twater_090611-090828_corrd.csv Strdln_Twater_090829-091012_corrd.csv Strdln_Twater_091015-100602_corrd.csv >> depth_0.1m.txt (repeat for all depths)
