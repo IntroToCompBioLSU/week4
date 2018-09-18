@@ -1,0 +1,12 @@
+1. inconsistencies: In the third file there are data points from 2010 also, the end of the lines all align in the third file unlike the other files. 
+2.a. Find:; replace:\t
+2.b.? Find:(\d)\t{4}  replace:$1NaN 
+2.c. Find:\s$,\t$ replace: empty field (didn't work?)
+2.d. Find:(\w+_\d+\.\d+) Replace: $1_
+2.e. Find:??? Find:NaNNaNNaN Replace: empty field
+2.f. Find:(\d+\.)(\d{1})\d+ replace:$1$2
+3. grep 2009 Strdln_Twater_090611-090828_corrd.csv >> 2009Samples.csv
+4.? Find:(\d{2}\.\d\t\d{4}) Replace:T$1 then in terminal grep T Strdln_Twater_090829-091012_corrd.csv >> completeLakeTemps.txt then in atom Find:T Replace empty field
+5.? grep 2009-[01-12]-[01-15] Strdln_Twater_091015-100602_corrd2.csv
+6. grep [20-06]: -n Strdln_Twater_090611-090828_corrd.csv >> NightTimeLakeTemps.txt
+7. ?? grep -E ":\d+\t\d+\.\d" Strdln_Twater_090611-090828_corrd.csv >> depth_0.1m
