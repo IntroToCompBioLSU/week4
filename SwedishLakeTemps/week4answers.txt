@@ -1,0 +1,20 @@
+1.Yes. One of the files does not include all the  depth measurements and the first depth measurement is followed by 3 semicolons.
+  Program used:Atom
+2.(a) Find: ; Replace: \t On Atom
+  (b)Find:\s Replace: NaN, Yes. Because of end of line space.
+  (c)Find:\s Replace: Nothing.
+  (d)Find:\s Replace: _
+  (e)
+  (f)Find: (\d+\.)(\d{1})\d+ Replace: $1 $2
+3.(a)head -1 Strdln_Twater_090611-090828_corrd.csv >>2009temp.txt
+  (b)grep 2009 Strdln_Twater_090611-090828_corrd.csv Strdln_Twater_090829-091012_corrd.csv Strdln_Twater_091015-100602_corrd.csv  >>2009temp.txt
+  (c)On the command line.
+4.(a)grep "[^(NaN)"] Strdln_Twater_090611-090828_corrd.csv Strdln_Twater_090829-091012_corrd.csv Strdln_Twater_091015-100602_corrd.csv >>completeLakeTemps.txt
+  (b)On the command line.
+5.(a)grep -E "20[0-9]{2}-[0-9]{2}-(01|15)" Strdln_Twater_090611-090828_corrd.csv Strdln_Twater_090829-091012_corrd.csv Strdln_Twater_091015-100602_corrd.csv >>SemiMonthlyLakeTemps.txt
+  (b) On the commandline.
+6.(a)grep -E "20[0-9]{2}-[0-9]{2}-[0-9]{2} (20|21|22|23|00|01|02|03|04|05|06):[0-9]{2}" Strdln_Twater_090611-090828_corrd.csv Strdln_Twater_090829-091012_corrd.csv Strdln_Twater_091015-100602_corrd.csv >>NightTimeLakeTemps.txt
+  (b)On the command line.
+7.
+
+ 
