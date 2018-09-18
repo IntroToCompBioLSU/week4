@@ -1,0 +1,28 @@
+Atom was used to explore the regex expressions while sed was used to actually change the file.
+
+1.) The inconsistency observed across the files appear to be missing datapoints between the semicolons.
+
+2.) a. sed -i 's/(;)(;)/$1NaN$2/g' repeat till n=0
+    b. sed -i 's/;/\t/g'
+    c. 's/\s+$//g'
+    d. 's/\ /\_/g'
+    e. This action proved impossible for me. No matter the combination of syntax using {} or \t with any search of [NaN] with {4,} found every instance of [NaN]. Since the data columns were formated bilaterally, it was impossible to use a first line expression to find only instances of [NaN]. I manuallly deleted these NaN repeats found at the end of each of the file. At 12 hours into the project, internet information has proven useless in resolving this problem, as well as chapter 2 and 3 in the book.
+    f. 's/(\d)\.(\d)+/$1.$2/g'
+
+3.) grep "MH_Time" [file] >2009Data.csv
+    grep "2009" [File 1, 2, 3] >>2009Data.csv
+
+4.) sed -i"_Backup.txt" 's/[NaN]//g' Strdln_Twater_091015-100602_corrd.csv Strdln_Twater_090829-091012_corrd.csv Strdln_Twater_090611-090828_corrd.csv | grep "20" Strdln_Twater_091015-100602_corrd.csv Strdln_Twater_090829-091012_corrd.csv Strdln_Twater_090611-090828_corrd.csv >CompleteLakeTemps.txt
+
+5.) \d+-\d+-[01][15] For some reason here, I had previously managed to do this step correctly, but I had to go back and edit CompleteLakeTemps, but that changed the file from csv to plane text document. Now, no command I can run will find the data. I've tried escaping every character, using exact values for two numbers instead of \d+, tried seperating 01 and 15
+I've spent atleast 3 hours on this step. I thoroughly think there's something else I'm missing, as when I created a new CompleteLakeTemps.v2.csv, a true csv file, the grep command still would not run, even for a specific day of each month.
+
+6.) grep "\d+_[00,01,02,03,04,05,20,21,22,23]" SemiMonthlyLakeTemps.txt >NightTimeLakeTemps.txt
+
+7.) sed -i 's/(.\d+\t).\d+\t.\d+\t.\d+\t.\d+\t.\d+\t.\d+\t/$1/g' CompleteLakeTemps.txt | grep "(.\d+\t)" CompleteLakeTemps.txt >depth_0.1m.txt
+    sed -i 's/.\d+\t(.\d+\t).\d+\t.\d+\t.\d+\t.\d+\t.\d+\t/$1/g' CompleteLakeTemps.txt | grep "(.\d+\t)" CompleteLakeTemps.txt >depth_0.3m.txt
+    sed -i 's/.\d+\t.\d+\t(.\d+\t).\d+\t.\d+\t.\d+\t.\d+\t/$1/g' CompleteLakeTemps.txt | grep "(.\d+\t)" CompleteLakeTemps.txt >depth_0.5m.txt
+    sed -i 's/.\d+\t.\d+\t.\d+\t(.\d+\t).\d+\t.\d+\t.\d+\t/$1/g' CompleteLakeTemps.txt | grep "(.\d+\t)" CompleteLakeTemps.txt >depth_1.0m.txt
+    sed -i 's/.\d+\t.\d+\t.\d+\t.\d+\t(.\d+\t).\d+\t.\d+\t/$1/g' CompleteLakeTemps.txt | grep "(.\d+\t)" CompleteLakeTemps.txt >depth_3.0m.txt
+    sed -i 's/.\d+\t.\d+\t.\d+\t.\d+\t.\d+\t(.\d+\t).\d+\t/$1/g' CompleteLakeTemps.txt | grep "(.\d+\t)" CompleteLakeTemps.txt >depth_5.0m.txt
+    sed -i 's/.\d+\t.\d+\t.\d+\t.\d+\t.\d+\t.\d+\t(.\d+\t)/$1/g' CompleteLakeTemps.txt | grep "(.\d+\t)" CompleteLakeTemps.txt >depth_7.0m.txt
