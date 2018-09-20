@@ -14,12 +14,23 @@ Atom was used to explore the regex expressions while sed was used to actually ch
 
 4.) sed -i"_Backup.txt" 's/[NaN]//g' Strdln_Twater_091015-100602_corrd.csv Strdln_Twater_090829-091012_corrd.csv Strdln_Twater_090611-090828_corrd.csv | grep "20" Strdln_Twater_091015-100602_corrd.csv Strdln_Twater_090829-091012_corrd.csv Strdln_Twater_090611-090828_corrd.csv >CompleteLakeTemps.txt
 
-5.) \d+-\d+-[01][15] For some reason here, I had previously managed to do this step correctly, but I had to go back and edit CompleteLakeTemps, but that changed the file from csv to plane text document. Now, no command I can run will find the data. I've tried escaping every character, using exact values for two numbers instead of \d+, tried seperating 01 and 15
-I've spent atleast 3 hours on this step. I thoroughly think there's something else I'm missing, as when I created a new CompleteLakeTemps.v2.csv, a true csv file, the grep command still would not run, even for a specific day of each month.
+5.) grep "[[:digit:]][[:digit:]]-[[:digit:]][[:digit:]]-01" CompleteLakeTemps.v2.csv >SemiMonthlyLakeTemps.txt
+    grep "[[:digit:]][[:digit:]]-[[:digit:]][[:digit:]]-15" CompleteLakeTemps.v2.csv >>SemiMonthlyLakeTemps.txt
+    It's taken me an embarassing amount of time to end up with this equation as I could not find any way to get a "01or15" expression.
 
-6.) grep "\d+_[00,01,02,03,04,05,20,21,22,23]" SemiMonthlyLakeTemps.txt >NightTimeLakeTemps.txt
+6.) The only explanation I have here is... I went nuclear.
+    grep "[[:digit:]][[:digit:]]_00" SemiMonthlyLakeTemps.txt >NightTimeLakeTemps.txt
+    grep "[[:digit:]][[:digit:]]_01" SemiMonthlyLakeTemps.txt >>NightTimeLakeTemps.txt
+    grep "[[:digit:]][[:digit:]]_02" SemiMonthlyLakeTemps.txt >>NightTimeLakeTemps.txt
+    grep "[[:digit:]][[:digit:]]_03" SemiMonthlyLakeTemps.txt >>NightTimeLakeTemps.txt
+    grep "[[:digit:]][[:digit:]]_04" SemiMonthlyLakeTemps.txt >>NightTimeLakeTemps.txt
+    grep "[[:digit:]][[:digit:]]_05" SemiMonthlyLakeTemps.txt >>NightTimeLakeTemps.txt
+    grep "[[:digit:]][[:digit:]]_20" SemiMonthlyLakeTemps.txt >>NightTimeLakeTemps.txt
+    grep "[[:digit:]][[:digit:]]_21" SemiMonthlyLakeTemps.txt >>NightTimeLakeTemps.txt
+    grep "[[:digit:]][[:digit:]]_22" SemiMonthlyLakeTemps.txt >>NightTimeLakeTemps.txt
+    grep "[[:digit:]][[:digit:]]_23" SemiMonthlyLakeTemps.txt >>NightTimeLakeTemps.txt
 
-7.) sed -i 's/(.\d+\t).\d+\t.\d+\t.\d+\t.\d+\t.\d+\t.\d+\t/$1/g' CompleteLakeTemps.txt | grep "(.\d+\t)" CompleteLakeTemps.txt >depth_0.1m.txt
+7.) sed -i 's/(\t\d+.\d\t)\d+.\d\t\d+.\d\t\d+.\d\t\d+.\d\t\d+.\d\t\d+.\d\t/$1/g' CompleteLakeTemps.txt | grep "(.\d+\t)" CompleteLakeTemps.txt >depth_0.1m.txt
     sed -i 's/.\d+\t(.\d+\t).\d+\t.\d+\t.\d+\t.\d+\t.\d+\t/$1/g' CompleteLakeTemps.txt | grep "(.\d+\t)" CompleteLakeTemps.txt >depth_0.3m.txt
     sed -i 's/.\d+\t.\d+\t(.\d+\t).\d+\t.\d+\t.\d+\t.\d+\t/$1/g' CompleteLakeTemps.txt | grep "(.\d+\t)" CompleteLakeTemps.txt >depth_0.5m.txt
     sed -i 's/.\d+\t.\d+\t.\d+\t(.\d+\t).\d+\t.\d+\t.\d+\t/$1/g' CompleteLakeTemps.txt | grep "(.\d+\t)" CompleteLakeTemps.txt >depth_1.0m.txt
