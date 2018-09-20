@@ -202,7 +202,7 @@ $2\t$1
   11. [BONUS PRACTICE] How many quotations (text inside pairs of quotation marks) are used in the entire text? This includes quotations that wrap over multiple lines. Note: if you're like me, you'll need to Google for help with this.
 
 
-## Week 4 Assignment (Due Tuesday, Sept. 18th by 1:30)
+## Week 4 Assignment (Due Tuesday, Sept. 25th by 1:30)
 
 For this assignment, we are going to use temperature data from some Swedish sub-arctic lakes (https://bolin.su.se/data/Crill-2015). We'll focus on 3 files that include temperature measurements from June 11th, 2009 until June 2nd, 2010.
   - `Strdln_Twater_090611-090828_corrd.csv`
@@ -233,4 +233,4 @@ __For all of these steps, save your answers to questions, as well as a descripti
 
 6. We'd like to do an analysis that only looks at nighttime temperatures. Use grep and regex to create a file that contains samples taken between 8PM (20:00) and 6AM (06:00). Save this file as `NightTimeLakeTemps.txt`.
 
-7. Lastly, we'd like to do separate analyses for the temperatures taken at different depths. Create separate files that contain measurements for each depth (but across all lakes). Save these as `depth_0.1m.txt`, `depth_0.3m.txt`, etc.
+7. Lastly, we'd like to do a separate analysis for temperatures taken at one specific depth. Create a separate file that contains measurements for just the 0.1m depth in the lake MH. Save these as `depth_0.1m.txt`.
