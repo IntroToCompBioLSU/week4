@@ -1,1 +1,14 @@
-1. There is missing data in several columns throughout.
+1. There is missing data in several columns throughout the data spreads.
+
+2. Using the find and repalce buffer:
+';' was replaced with '\t' 
+'\t\t' was replced with '\tNaN\t'
+'( |\t)$' was replaced with ''
+' ' was replaced with '_'
+'^.*NaN.*$' was replaced with ''
+'^\s\n' used to remove blank lines
+
+3. sed -n '1p' Strdln_Twater_090611-090828_corrd.csv > 2009Measurements.txt was used to add the header of the three files to a new file.
+grep -v '^M' "Strdln_Twater_090611-090828_corrd_sm.csv" "Strdln_Twater_090829-091012_corrd_sm.csv" "Strdln_Twater_091015-100602_corrd_sm.csv" >> 2009Measurements.txt
+
+
