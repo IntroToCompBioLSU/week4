@@ -1,0 +1,18 @@
+1. inconsistencies: In the third file every line is missing depth 0.1 and 0.3 also has data from 2010. 
+2.
+	a. Find:; replace:\t
+	b.? Find:(\d)\t{4}  replace:$1NaN 
+	c. Find:\s$,\t$ replace: empty field
+	d. Find:(\w+)\s(\w+) Replace: $1_$2
+	e. Find:??? Find:^NaN Replace: empty field
+	f. Find:(\d+\.)(\d{1})\d+ replace:$1$2
+3. grep MH_Time Strdln_Twater_090611-090828_corrd.csv >> 2009Samples.csv then, grep 2009 Strdln_Twater_090611-090828_corrd.csv >> 2009Samples.csv for all files
+
+4.In terminal grep _2009 Strdln_Twater_09(08 and 06)29-091012_corrd.csv >> completeLakeTemps.txt Didn't do 3rd file because has empty feild in everyline
+
+5.couldn't get grep to use regex so, I did: In atom Find:2009\-\d+\-(01|15) Replace:$1$2D then in terminal grep D completeLakeTemps.txt >> SemiMonthlyLakeTemps.txt then in atom, Find:D Replace: empty 
+
+6. grep [20-06]: -n Strdln_Twater_090611-090828_corrd.csv >> NightTimeLakeTemps.txt
+
+7. Find: (\d{4}\-\d{2}\-\d{2}_\d{2}:\d{2}_\d{3}\.\d_)(\d{2}\.\d{1}).* Replace: $2 then, file save as depth_0.1m.txt. 
+
