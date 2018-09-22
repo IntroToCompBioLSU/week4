@@ -1,4 +1,4 @@
-1. There is missing data in several columns throughout the data spreads.
+1. The date and time labels are swapped.
 
 2. Using the find and repalce buffer:
 ';' was replaced with '\t' 
@@ -9,6 +9,17 @@
 '^\s\n' used to remove blank lines
 
 3. sed -n '1p' Strdln_Twater_090611-090828_corrd.csv > 2009Measurements.txt was used to add the header of the three files to a new file.
+
 grep -v '^M' "Strdln_Twater_090611-090828_corrd_sm.csv" "Strdln_Twater_090829-091012_corrd_sm.csv" "Strdln_Twater_091015-100602_corrd_sm.csv" >> 2009Measurements.txt
+was used to pull all remaining data from the three files into the new file.
+
+4. grep -v '^.*NaN.*' "2009Measurements.txt" >> completeLakeTemps.txt
+used to take all data lines with out NaN in the data and copy them into a new file.
+
+5.Used regex to replace year values of those DOY for the 01 and 15, then used grep -v command in terminal to create a new file with only those of replaced year value, returned the year values to thier original state using regex find and replace and saved the file.
+
+6.
+
+7.
 
 
