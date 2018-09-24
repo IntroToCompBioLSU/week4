@@ -16,7 +16,7 @@ Atom was used to explore the regex expressions while sed was used to actually ch
 
 5.) grep "[[:digit:]][[:digit:]]-[[:digit:]][[:digit:]]-01" CompleteLakeTemps.v2.csv >SemiMonthlyLakeTemps.txt
     grep "[[:digit:]][[:digit:]]-[[:digit:]][[:digit:]]-15" CompleteLakeTemps.v2.csv >>SemiMonthlyLakeTemps.txt
-    It's taken me an embarassing amount of time to end up with this equation as I could not find any way to get a "01or15" expression.
+    It's taken me an embarrassing amount of time to end up with this equation as I could not find any way to get a "01or(|)15" expression.
 
 6.) The only explanation I have here is... I went nuclear.
     grep "[[:digit:]][[:digit:]]_00" SemiMonthlyLakeTemps.txt >NightTimeLakeTemps.txt
@@ -30,10 +30,6 @@ Atom was used to explore the regex expressions while sed was used to actually ch
     grep "[[:digit:]][[:digit:]]_22" SemiMonthlyLakeTemps.txt >>NightTimeLakeTemps.txt
     grep "[[:digit:]][[:digit:]]_23" SemiMonthlyLakeTemps.txt >>NightTimeLakeTemps.txt
 
-7.) sed -i 's/(\t\d+.\d\t)\d+.\d\t\d+.\d\t\d+.\d\t\d+.\d\t\d+.\d\t\d+.\d\t/$1/g' CompleteLakeTemps.txt | grep "(.\d+\t)" CompleteLakeTemps.txt >depth_0.1m.txt
-    sed -i 's/.\d+\t(.\d+\t).\d+\t.\d+\t.\d+\t.\d+\t.\d+\t/$1/g' CompleteLakeTemps.txt | grep "(.\d+\t)" CompleteLakeTemps.txt >depth_0.3m.txt
-    sed -i 's/.\d+\t.\d+\t(.\d+\t).\d+\t.\d+\t.\d+\t.\d+\t/$1/g' CompleteLakeTemps.txt | grep "(.\d+\t)" CompleteLakeTemps.txt >depth_0.5m.txt
-    sed -i 's/.\d+\t.\d+\t.\d+\t(.\d+\t).\d+\t.\d+\t.\d+\t/$1/g' CompleteLakeTemps.txt | grep "(.\d+\t)" CompleteLakeTemps.txt >depth_1.0m.txt
-    sed -i 's/.\d+\t.\d+\t.\d+\t.\d+\t(.\d+\t).\d+\t.\d+\t/$1/g' CompleteLakeTemps.txt | grep "(.\d+\t)" CompleteLakeTemps.txt >depth_3.0m.txt
-    sed -i 's/.\d+\t.\d+\t.\d+\t.\d+\t.\d+\t(.\d+\t).\d+\t/$1/g' CompleteLakeTemps.txt | grep "(.\d+\t)" CompleteLakeTemps.txt >depth_5.0m.txt
-    sed -i 's/.\d+\t.\d+\t.\d+\t.\d+\t.\d+\t.\d+\t(.\d+\t)/$1/g' CompleteLakeTemps.txt | grep "(.\d+\t)" CompleteLakeTemps.txt >depth_7.0m.txt
+7.) find: (St.{36})(20.{14})(\t\d+.\d\t).+(20\d\d-.{11})(\t\d+.\d).+
+    replace: $1\$2\$3\$4\$5
+    I tried converting this over to a sed command to no avail. Atom was used; saved as depth_0.1m.txt
