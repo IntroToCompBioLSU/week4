@@ -10,9 +10,10 @@
 
 4.In terminal grep _2009 Strdln_Twater_09(08 and 06)29-091012_corrd.csv >> completeLakeTemps.txt Didn't do 3rd file because has empty feild in everyline
 
-5.couldn't get grep to use regex so, I did: In atom Find:2009\-\d+\-(01|15) Replace:$1$2D then in terminal grep D completeLakeTemps.txt >> SemiMonthlyLakeTemps.txt then in atom, Find:D Replace: empty 
+5. Find: (2009\-\d+\-)(01|15) Replace:$1$2D then, grep 15D and 1D completeLakeTemps.txt >> SemiMonthlyLakeTemps.txt then, find: (2009\-\d+\-)(01|15)D replace:$1$2
 
-6. grep [20-06]: -n Strdln_Twater_090611-090828_corrd.csv >> NightTimeLakeTemps.txt
+6. grep 20:, grep 21: SemiMonthlyLakeTemps.txt >> NightTimeLakeTemps.txt
+repeated for each time.
 
 7. Find: (\d{4}\-\d{2}\-\d{2}_\d{2}:\d{2}_\d{3}\.\d_)(\d{2}\.\d{1}).* Replace: $2 then, file save as depth_0.1m.txt. 
 
