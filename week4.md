@@ -3,6 +3,7 @@
 ## Questions from last week?
 
 - Git workflows?
+(Dr\.|Mr\.|Ms\.|\Mrs\.).*.*\h(\p{L}).*.*\h([A-Z]).*
 - Troubles with the assignment?
 
 ## Marine Biology in Alaska
