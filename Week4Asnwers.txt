@@ -1,0 +1,55 @@
+Opened files in terminal.
+
+1.The first thing to do when working with data files for the first time, especially those created by someone else, is to look through them. Do you notice any inconsistencies across files in how data are recorded?
+	
+	The files have different data.
+
+2. Let's say we are preparing to analyze these data in a program that has certain formatting requirements. For each of these requirements, write one or more series of Find and Replace statements using regex syntax.
+  - The data fields are currently delimited by semicolons, but our program requires tab-delimited files.
+		
+-Terminal: sed -i 's/;/\t/g' Strdln_Twater_090829-091012_corrd_sm.csv Strdln_Twater_091015-100602_corrd_sm.csv Strdln_Twater_090611-090828_corrd_sm.csv 
+		
+  - Our program does not handle blank fields. Empty fields should be replaced with NaN (which stands for "Not a Number").
+		
+-Terminal:sed -i 's/\s/NaN/g' Strdln_Twater_090611-090828_corrd_sm.csv Strdln_Twater_090829-091012_corrd_sm.csv Strdln_Twater_091015-100602_corrd_sm.csv 
+
+    - Double check that you've done this properly. Do you still see empty fields? If so, why? Turn on invisible characters to help.
+  - Our program does not like whitespace on the end of lines. Remove all whitespace (spaces and tabs) from line ends.
+
+-Terminal:sed -i 's/\s$//g' Strdln_Twater_090611-090828_corrd_sm.csv Strdln_Twater_090829-091012_corrd_sm.csv Strdln_Twater_091015-100602_corrd_sm.csv 
+
+  - Our program does not like spaces in any of its headers or fields. Replace spaces with underscores (_).
+
+Terminal:sed -i 's/(\w) (\w)/$1_$2/g' Strdln_Twater_090611-090828_corrd_sm.csv Strdln_Twater_090829-091012_corrd_sm.csv Strdln_Twater_091015-100602_corrd_sm.csv 
+
+  - Our program does not like lines with all missing information (only NaNs). Delete all characters from these lines.
+
+Terminal: sed -i 's/NaN//g' Strdln_Twater_090611-090828_corrd_sm.csv Strdln_Twater_090829-091012_corrd_sm.csv Strdln_Twater_091015-100602_corrd_sm.csv 
+
+  - Our program can only handle one digit after the decimal place for each number. Replace all numbers with trimmed versions.
+
+Terminal: sed -i 's/(\d\.\d)\d+/$1/g' Strdln_Twater_090611-090828_corrd_sm.csv Strdln_Twater_090829-091012_corrd_sm.csv Strdln_Twater_091015-100602_corrd_sm.csv
+
+3. We also need one file that contains all measurements (from all input files) with samples from 2009. What is a series of Terminal commands (should only take 2 or 3) to create a new file with all 2009 measurements. This file should still have one header line at the top (and none elsewhere in the file). Save the commands you use to do
+
+-One of the files do not have any information for MH .1 and .3 depths
+
+-Terminal: grep 2009 Strdln_Twater_090611-090828_corrd_sm.csv Strdln_Twater_090829-091012_corrd_sm.csv Strdln_Twater_091015-100602_corrd_sm.csv >> 2009Samples.txt
+
+4. Use regex and grep to extract all lines from all files that are complete (have no NaN values) and save them in a new file called `completeLakeTemps.txt`.
+
+-Terminal:  grep -E \d Strdln_Twater_090611-090828_corrd_sm.csv Strdln_Twater_090829-091012_corrd_sm.csv Strdln_Twater_091015-100602_corrd_sm.csv >> CompleteLakeTemps.txt
+
+5. The full dataset is pretty large and we want to run some analyses that only have the measurements recorded on the 1st and 15th days of each month. Use grep with regex to create one combined file with just these measurements and save it as `SemiMonthlyLakeTemps.txt`.
+
+-Terminal: grep -E "d01" Strdln_Twater_090611-090828_corrd_sm.csv Strdln_Twater_090829-091012_corrd_sm.csv Strdln_Twater_091015-100602_corrd_sm.csv >> SemiMonthlyLakeTemps.txt
+	grep -E "d15" Strdln_Twater_090611-090828_corrd_sm.csv Strdln_Twater_090829-091012_corrd_sm.csv Strdln_Twater_091015-100602_corrd_sm.csv >> SemiMonthlyLakeTemps.txt
+
+6. We'd like to do an analysis that only looks at nighttime temperatures. Use grep and regex to create a file that contains samples taken between 8PM (20:00) and 6AM (06:00). Save this file as `NightTimeLakeTemps.txt`.
+
+-Terminal: (repeat for each hour): grep -E "06:00" Strdln_Twater_090611-090828_corrd_sm.csv Strdln_Twater_090829-091012_corrd_sm.csv Strdln_Twater_091015-100602_corrd_sm.csv >> NightTimeLakeTemps.txt
+
+7. Lastly, we'd like to do a separate analysis for temperatures taken at one specific depth. Create a separate file that contains measurements for just the 0.1m depth in the lake MH. Save these as `depth_0.1m.txt`.
+
+-Terminal:  awk '{print $3}' Strdln_Twater_090611-090828_corrd_sm.csv Strdln_Twater_090829-091012_corrd_sm.csv Strdln_Twater_091015-100602_corrd_sm.csv >> depth_0.1m.txt 
+
