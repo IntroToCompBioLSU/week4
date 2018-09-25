@@ -1,4 +1,5 @@
-1. The date and time labels are swapped.
+1. The date and time labels are swapped. Find and replce can be used typing it as found with parentheses to conserve the labels and swapped the order of the values in the replacement.
+Ex: Find: '(MH_Time)\s(MH_DOY)' Replace: '$2 $1'
 
 2. Using the find and repalce buffer:
 ';' was replaced with '\t' 
@@ -18,8 +19,10 @@ used to take all data lines with out NaN in the data and copy them into a new fi
 
 5.Used regex to replace year values of those DOY for the 01 and 15, then used grep -v command in terminal to create a new file with only those of replaced year value, returned the year values to thier original state using regex find and replace and saved the file.
 
-6.
+6.Used sed -n '1p' completeLakeTemp.txt >> NightTimeLakeTemps.txt to print the header line into the new file and grep -E '^2009.*(06:00|20:00).*' "completeLakeTemps.txt" >> NightTimeLakeTemps.txt
+to output those datum recorded at 06:00 and 20:00 into the new existing file.
 
-7.
+7. Used awk '{print $3}' completeLakeTemps.txt >> depth_0.1m.txt
+to print the third column into the new text.
 
 
