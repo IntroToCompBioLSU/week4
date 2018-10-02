@@ -1,0 +1,34 @@
+1.
+Yes. A few inconsistencies in how data was recorded.
+
+2.
+find \; replace \t
+find \t\t\t\t replace NaN
+find \s+$ replace lineend
+find \s replace _ on line 1
+find NaN+ replace deleted
+find (\d+\.)(\d{1})\d+ replace \1\2
+
+3.
+cat Strdln_Twater_090611-090828_corrd_sm.csv >> 2009Measurements.txt
+cat Strdln_Twater_090829-091012_corrd_sm.csv > 2009Measurements.txt
+cat Strdln_Twater_091015-100602_corrd_sm.csv > 2009Measurements.txt
+
+4.
+grep -E [^NaN] 2009Measurements.txt >> completeLakeTemps.txt  
+
+5. 
+grep -E "(\d+\-\d+\-(01))\s.+" 2009Measurements.txt > SemiMonthlyLakeTemps.txt 
+grep -E "(\d+\-\d+\-(15))\s.+" 2009Measurements.txt >> SemiMonthlyLakeTemps.txt
+
+6. 
+grep -E "(20\:00).+" 2009Measurements.txt >> NightTimeLakeTemps.txt
+grep -E "(06\:00).+" 2009Measurements.txt >> NightTimeLakeTemps.txt
+
+7. 
+ grep -E "(\d+\-\d+\-\d+).(\d\d:\d\d)\t(\d+\.\d+)\t+(\d+\.\d+)" 2009Measurements.txt >> depth_0.3m.txt
+ grep -E "(\d+\-\d+\-\d+).(\d\d:\d\d)\t(\d+\.\d+)" 2009Measurements.txt > depth_0.1m.txt
+ grep -E "(\d+\-\d+\-\d+).(\d\d:\d\d)\t(\d+\.\d+)\t+(\d+\.\d+).(\d+\.\d+)" 2009Measurements.txt >> depth_0.5m.txt
+ grep -E "(\d+\-\d+\-\d+).(\d\d:\d\d)\t(\d+\.\d+)\t+(\d+\.\d+).(\d+\.\d+).(\d+\.\d+)" 2009Measurements.txt >> depth_1.0m.txt
+ grep -E "(\d+\-\d+\-\d+).(\d\d:\d\d)\t(\d+\.\d+)\t+(\d+\.\d+).(\d+\.\d+).(\d+\.\d+).(\d+\.\d+)" 2009Measurements.txt >> depth_3.0m.txt
+ grep -E "(\d+\-\d+\-\d+).(\d\d:\d\d)\t(\d+\.\d+)\t+(\d+\.\d+).(\d+\.\d+).(\d+\.\d+).(\d+\.\d+).(\d+\.\d+)" 2009Measurements.txt >> depth_5.0m.txt
