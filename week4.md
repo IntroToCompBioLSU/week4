@@ -46,9 +46,13 @@ Program on Wednesday September 19th at 7PM in Williams Hall 202.
   - To begin, go to the `Find` menu and select `Find in Buffer`. This will conduct a search on the file that you currently have open.
   - By default, Atom does __not__ use regular expression syntax. It will interpret all text strings literally. To illustrate this, look for `^` in this file. Atom should immediately highlight the character at this point in the file.
   - Now turn on regex by clicking the option illustrated by `.*` in the Find option menu (upper right). Now what happens when you search with that same character? Atom should select the beginning of every line in the file. In regex syntax, `^` has a special meaning as the beginning of a line.
-  - Now try searching with $. What happens? Both `^` and `$` are special characters for regex.
+  - Now try searching with $. What happens? Both `^` (anchor at beginning) and `$` (anchor at the end) are special characters for regex.
   - Now try searching these other special character combinations: `\n`, `\s`, `\w`, `.`, and `\d`.
     - Each of these is a type of wildcard. What do they match?
+    - \s space
+    - \n character at end of the line
+    - \w all letters
+    - \d all numbers 
 
 
 - [ ] Find and Replace
@@ -96,6 +100,7 @@ To explore the behavior of escaping characters, try the following:
     - `[AB]`
     - `[12345]`
     - `[_A56]`
+    - `[^A-N]` everything that isn't A-N
   - Note that, in Atom, you can choose whether or not your search is case sensitive by toggling the button `Aa` next to the regex (`.*`) button. However, most uses of regex, especially on the command line, __are__ case sensitive. To be consistent with other implementations, go ahead and __turn on case sensitivity__.
   - Ranges of letters or numbers can be included in custom sets, to avoid having to type each one individually. For instance,
     - `[0-9]` matches all individual digits
