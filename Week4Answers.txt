@@ -1,28 +1,40 @@
 1. The date and time labels are swapped. Find and replce can be used typing it as found with parentheses to conserve the labels and swapped the order of the values in the replacement.
 Ex: Find: '(MH_Time)\s(MH_DOY)' Replace: '$2 $1'
 
+DB: Good thought, but in this case DOY is just a numerical way of measuring the date and time.
+
 2. Using the find and repalce buffer:
-';' was replaced with '\t' 
-'\t\t' was replced with '\tNaN\t'
-'( |\t)$' was replaced with ''
-' ' was replaced with '_'
-'^.*NaN.*$' was replaced with ''
+';' was replaced with '\t' 				DB: Good
+'\t\t' was replced with '\tNaN\t'		DB: Good, but what happens if you have two empty cells next to each other - '\t\t\t'?
+'( |\t)$' was replaced with ''			DB: Good, but might add + for multiple spaces or tabs.
+' ' was replaced with '_'				DB: Good.
+'^.*NaN.*$' was replaced with ''		DB: Nice, I like this.
 '^\s\n' used to remove blank lines
+
+DB: What about trimming numbers to just one digit?
 
 3. sed -n '1p' Strdln_Twater_090611-090828_corrd.csv > 2009Measurements.txt was used to add the header of the three files to a new file.
 
 grep -v '^M' "Strdln_Twater_090611-090828_corrd_sm.csv" "Strdln_Twater_090829-091012_corrd_sm.csv" "Strdln_Twater_091015-100602_corrd_sm.csv" >> 2009Measurements.txt
 was used to pull all remaining data from the three files into the new file.
 
+DB: How do we avoid measurements from years other than 2009?
+
 4. grep -v '^.*NaN.*' "2009Measurements.txt" >> completeLakeTemps.txt
 used to take all data lines with out NaN in the data and copy them into a new file.
 
+DB: Good.
+
 5.Used regex to replace year values of those DOY for the 01 and 15, then used grep -v command in terminal to create a new file with only those of replaced year value, returned the year values to thier original state using regex find and replace and saved the file.
+
+DB: What regex expressions did you use?
 
 6.Used sed -n '1p' completeLakeTemp.txt >> NightTimeLakeTemps.txt to print the header line into the new file and grep -E '^2009.*(06:00|20:00).*' "completeLakeTemps.txt" >> NightTimeLakeTemps.txt
 to output those datum recorded at 06:00 and 20:00 into the new existing file.
 
+DB: Sorry, the directions might have been a little unclear. I was asking for all values in between 20:00 and 6:00.
+
 7. Used awk '{print $3}' completeLakeTemps.txt >> depth_0.1m.txt
 to print the third column into the new text.
 
-
+DB: This is good. One possible addition - you could include the first column to keep the dates and times paired with the measurements.
