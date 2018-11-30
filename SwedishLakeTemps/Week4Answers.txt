@@ -1,0 +1,35 @@
+Atom was used to explore the regex expressions while sed was used to actually change the file.
+
+1.) The inconsistency observed across the files appear to be missing datapoints between the semicolons.
+
+2.) a. sed -i 's/(;)(;)/$1NaN$2/g' repeat till n=0
+    b. sed -i 's/;/\t/g'
+    c. 's/\s+$//g'
+    d. 's/\ /\_/g'
+    e. This action proved impossible for me. No matter the combination of syntax using {} or \t with any search of [NaN] with {4,} found every instance of [NaN]. Since the data columns were formated bilaterally, it was impossible to use a first line expression to find only instances of [NaN]. I manuallly deleted these NaN repeats found at the end of each of the file. At 12 hours into the project, internet information has proven useless in resolving this problem, as well as chapter 2 and 3 in the book.
+    f. 's/(\d)\.(\d)+/$1.$2/g'
+
+3.) grep "MH_Time" [file] >2009Data.csv
+    grep "2009" [File 1, 2, 3] >>2009Data.csv
+
+4.) sed -i"_Backup.txt" 's/[NaN]//g' Strdln_Twater_091015-100602_corrd.csv Strdln_Twater_090829-091012_corrd.csv Strdln_Twater_090611-090828_corrd.csv | grep "20" Strdln_Twater_091015-100602_corrd.csv Strdln_Twater_090829-091012_corrd.csv Strdln_Twater_090611-090828_corrd.csv >CompleteLakeTemps.txt
+
+5.) grep "[[:digit:]][[:digit:]]-[[:digit:]][[:digit:]]-01" CompleteLakeTemps.v2.csv >SemiMonthlyLakeTemps.txt
+    grep "[[:digit:]][[:digit:]]-[[:digit:]][[:digit:]]-15" CompleteLakeTemps.v2.csv >>SemiMonthlyLakeTemps.txt
+    It's taken me an embarrassing amount of time to end up with this equation as I could not find any way to get a "01or(|)15" expression.
+
+6.) The only explanation I have here is... I went nuclear.
+    grep "[[:digit:]][[:digit:]]_00" SemiMonthlyLakeTemps.txt >NightTimeLakeTemps.txt
+    grep "[[:digit:]][[:digit:]]_01" SemiMonthlyLakeTemps.txt >>NightTimeLakeTemps.txt
+    grep "[[:digit:]][[:digit:]]_02" SemiMonthlyLakeTemps.txt >>NightTimeLakeTemps.txt
+    grep "[[:digit:]][[:digit:]]_03" SemiMonthlyLakeTemps.txt >>NightTimeLakeTemps.txt
+    grep "[[:digit:]][[:digit:]]_04" SemiMonthlyLakeTemps.txt >>NightTimeLakeTemps.txt
+    grep "[[:digit:]][[:digit:]]_05" SemiMonthlyLakeTemps.txt >>NightTimeLakeTemps.txt
+    grep "[[:digit:]][[:digit:]]_20" SemiMonthlyLakeTemps.txt >>NightTimeLakeTemps.txt
+    grep "[[:digit:]][[:digit:]]_21" SemiMonthlyLakeTemps.txt >>NightTimeLakeTemps.txt
+    grep "[[:digit:]][[:digit:]]_22" SemiMonthlyLakeTemps.txt >>NightTimeLakeTemps.txt
+    grep "[[:digit:]][[:digit:]]_23" SemiMonthlyLakeTemps.txt >>NightTimeLakeTemps.txt
+
+7.) find: (St.{36})(20.{14})(\t\d+.\d\t).+(20\d\d-.{11})(\t\d+.\d).+
+    replace: $1\$2\$3\$4\$5
+    I tried converting this over to a sed command to no avail. Atom was used; saved as depth_0.1m.txt
