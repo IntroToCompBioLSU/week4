@@ -1,22 +1,30 @@
 1. No major differences, Only some cells have an empty field with missing data
 
+DB: Did you change semicolons to tabs anywhere? I don't see it.
+
 2. Find: ;; Replace: ;NaN;
-	Find: ;; Replace: ;
+	Find: ;; Replace: ;		DB: This seems like it could delete whole fields?
 
 Find: \  Replace: _
 	Find: \  Replace: _
 
-([^\t\r\n])[ \t]+$ (Keeps crashing atom)
+([^\t\r\n])[ \t]+$ (Keeps crashing atom)	DB: I think you could drop the first part of this. And the second be just "\s+$".
 
-(?-s)^.* NaN;Nan;NaN;NaN .*\R
+(?-s)^.* NaN;Nan;NaN;NaN .*\R	DB: I'm not sure I follow. What's the beginning? And will those only work if there are 4 NaNs?
+
+DB: Trimming numbers to one decimal place?
 
 3. grep -w '2009' -- Strdln_Twater_090611-090828_corrd.csv Strdln_Twater_090829-091012_corrd.csv 
 Strdln_Twater_091015-100602_corrd.csv | uniq > 2009LakeData.csv
 
-4. grep -v "NaN" 'Strdln_Twater_090611-090828_corrd.csv'>> completeLakeTemps.csv
+DB: Above is interesting, but it adds file names to beginnings of lines and doesn't include the header line.
 
-5.
+4. grep -v "NaN" 'Strdln_Twater_090611-090828_corrd.csv'>> completeLakeTemps.csv	DB: Good idea! My version was much longer.
 
-6. grep -E '([0-6]|2[0-3]):([0-5][0-9])' Strdln_Twater_090611-090828_corrd.csv
+5. DB:	Missing SemiMonthlyLakeTemps line.
+
+6. grep -E '([0-6]|2[0-3]):([0-5][0-9])' Strdln_Twater_090611-090828_corrd.csv	DB: This seems to capture some daytime recordings.
 
 7. awk '{print $3}' Strdln_Twater_090611-090828_corrd.csv Strdln_Twater_090829-091012_corrd.csv Strdln_Twater_091015-100602_corrd.csv > depth_0.1m.txt
+
+DB: Nice! Although, it might be good to also keep the dates and times associated with these measurements.
