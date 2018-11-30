@@ -1,0 +1,22 @@
+1. No major differences, Only some cells have an empty field with missing data
+
+2. Find: ;; Replace: ;NaN;
+	Find: ;; Replace: ;
+
+Find: \  Replace: _
+	Find: \  Replace: _
+
+([^\t\r\n])[ \t]+$ (Keeps crashing atom)
+
+(?-s)^.* NaN;Nan;NaN;NaN .*\R
+
+3. grep -w '2009' -- Strdln_Twater_090611-090828_corrd.csv Strdln_Twater_090829-091012_corrd.csv 
+Strdln_Twater_091015-100602_corrd.csv | uniq > 2009LakeData.csv
+
+4. grep -v "NaN" 'Strdln_Twater_090611-090828_corrd.csv'>> completeLakeTemps.csv
+
+5.
+
+6. grep -E '([0-6]|2[0-3]):([0-5][0-9])' Strdln_Twater_090611-090828_corrd.csv
+
+7. awk '{print $3}' Strdln_Twater_090611-090828_corrd.csv Strdln_Twater_090829-091012_corrd.csv Strdln_Twater_091015-100602_corrd.csv > depth_0.1m.txt
