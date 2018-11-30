@@ -1,0 +1,23 @@
+	 1.(a)Yes the depth measurements vary from file to file.
+    (b)Atom
+	2.(a) Find: ; Replace: \t On Atom
+	  (b)Find: ^$ Replace: NaN Yes. The file still contains beginning and end of line characters. 
+	  (c)Find: \s$ Replace: Nothing.
+	  (d)Find: space Replace: _
+	  (e)Find: ^[^\w]$ Replace: Nothing
+	  (f)Find: (\d+\.)(\d{1})\d+ Replace: $1$2
+	3.(a) head -1 Strdln_Twater_090611-090828_corrd_sm.csv2 >>2009temp.txt
+	  (b) grep 2009 Strdln_Twater_090611-090828_corrd_sm.csv2 Strdln_Twater_090829-091012_corrd_sm.csv Strdln_Twater_091015-100602_corrd_sm.csv >>2009temp.txt
+	  (c)On the command line.
+	4.(a)grep "[^(NaN)]” Strdln_Twater_090611-090828_corrd.csv Strdln_Twater_090829-091012_corrd.csv Strdln_Twater_091015-100602_corrd.csv >>completeLakeTemps.txt
+	  (b)On the command line.
+	5.(a) grep -E "20[0-9]{2}-[0-9]{2}-(01|15)" Strdln_Twater_090829-091012_corrd_sm.csv Strdln_Twater_090611-090828_corrd_sm.csv2 Strdln_Twater_091015-100602_corrd_sm.csv >> SemiMonthlyLakeTemps.txt
+	  (b) On the commandline.
+	6.(a)grep -E "20[0-9]{2}-[0-9]{2}-[0-9]{2}_(20|21|22|23|00|01|02|03|04|05|06):[0-9]{2}" Strdln_Twater_090611-090828_corrd.csv Strdln_Twater_090829-091012_corrd.csv Strdln_Twater_091015-100602_corrd.csv >>NightTimeLakeTemps.txt
+	  (b)On the command line.
+   7. (a)Find:\d+-\d+-\d+_\d+:\d+\t(\d+\.\d)\t+\d\.\d\s\d\.\d\s\d\.\d\s\d\.\d Replace:$1
+       (b) Atom.
+ (c) Files saved separately as 0.1mStrdln_Twater_090611-090828_corrd_sm,   0.1mStrdln_Twater_090829-091012_corrd_sm and  0.1mStrdln_Twater_091015-100602_corrd_sm
+
+
+
