@@ -1,16 +1,51 @@
 1. Twater- 0910 does not have any information for MH .1 and .3 (C and D) columns. There is 7m for MH and not IH recorded. 9/10 has significantly lower data for MH 0.5m and .1 columns E and F which are not as similar as E and F columns for 9/08 and 9/06. 9/08 and 9/06 also have blocked (empty rows under G,H,I columns that 9/10 doesnt have. 9/10 also has columns L and M blank and R-- blank
 
+DB: Good! 
+
 2A. In Terminal: sed -i"_backup0906" 's/;/t/g' ~/Desktop/week4/SwedishLakeTemps/Strdln_Twater_0906.csv
+
+DB: Good, but I think your replacement string should be \t rather than just t.
+
 2B. In Terminal: sed -i"_backup0906" 's/t/NaN/g' ~/Desktop/week4/SwedishLakeTemps/Strdln_Twater_0906.csv
+
+DB: If tabs occur between fields, we'll need to search for something like \t\t to find an empty field.
+
 2C. In Terminal: sed -i"_backup0906" 's/[[:blank:]]*$//' ~/Desktop/week4/SwedishLakeTemps/Strdln_Twater_0906.csv
+
+DB: Good!
+
 2D. In Terminal: sed -i"_backup0906" 's/^/\_/g' ~/Desktop/week4/SwedishLakeTemps/Strdln_Twater_0906.csv
+
+DB: Wouldn't this add an underscore to the beginning of every line? Maybe just search for " "?
+
 2E. In Atom SEARCH NaNNaNNaN (repeated until lines with only NaN were found) REPLACE (left field blank)
+
+DB: This will work, but is labor intensive! Can automate with something like:
+Find: ^\s*(NaN\s)+NaN*\s*$
+Replace: ""
+
 2F. In Atom SEARCH (\d\.\d)\d+ REPLACE $1
 
-3. grep 2009 Strdln_Twater_0906.csv >> 2009Samples.csv Repeat for all 3 files
+DB: Good! But might have some with multiple digits before the decimal:
+(\d+\.\d)\d+
+
+3. grep 2009 Strdln_Twater_0906.csv >> 2009Samples.csv Repeat for all 3 files'
+
+DB: This will probably work, but there is some chance that there would be another value on a line that's 2009, but isn't a year.
+
 4. grep 2009 Strdln_Twater_0906.csv >> CompleteLakeTemps.txt  Repeat for all 3 files
+
+DB: Not sure what this has to do with avoiding NaNs...
+
 5A. grep -E "01" Strdln_Twater_0906.csv >> SemiMonthlyLakeTemps.txt  Repeat for all 3 files 
 5B. grep -E "15" Strdln_Twater_0906.csv >>  SemiMonthlyLakeTemps.txt Repeat for all 3 files
+
+DB: Good thought, but again need to be careful about 01 or 15 occurring in fields other than the day (like the month).
+
 6. grep [20-06] -n Strdln_Twater_0906.csv >> NightTimeLakeTemps.txt  Repeat for all 3 files 
+
+DB: Need to come up with a more specific pattern to capture these times.
+
 7. awk '{print $3}' Strdln_Twater_0906.csv >> depth_0.1m.txt  Repeat for all 3 files 
  
+DB: Good! Could also include the first column to keep dates and times paired with measurements.
