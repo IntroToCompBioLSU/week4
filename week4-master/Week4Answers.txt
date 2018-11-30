@@ -1,12 +1,14 @@
 1.
 Yes. A few inconsistencies in how data was recorded.
 
+DB: Good to note what these are to help with data processing later.
+
 2.
 find \; replace \t
-find \t\t\t\t replace NaN
+find \t\t\t\t replace NaN		DB: This might result in the deletion of some cells, right?
 find \s+$ replace lineend
-find \s replace _ on line 1
-find NaN+ replace deleted
+find \s replace _ on line 1		DB: Careful if you've already converted ; to \t, since \s will match both spaces and \t.
+find NaN+ replace deleted		DB: Need to account for tabs between NaN values.
 find (\d+\.)(\d{1})\d+ replace \1\2
 
 3.
@@ -14,16 +16,24 @@ cat Strdln_Twater_090611-090828_corrd_sm.csv >> 2009Measurements.txt
 cat Strdln_Twater_090829-091012_corrd_sm.csv > 2009Measurements.txt
 cat Strdln_Twater_091015-100602_corrd_sm.csv > 2009Measurements.txt
 
+DB: Need to avoid measurements from other years in the last file. And avoid repeating header line.
+
 4.
 grep -E [^NaN] 2009Measurements.txt >> completeLakeTemps.txt  
+
+DB: Good!
 
 5. 
 grep -E "(\d+\-\d+\-(01))\s.+" 2009Measurements.txt > SemiMonthlyLakeTemps.txt 
 grep -E "(\d+\-\d+\-(15))\s.+" 2009Measurements.txt >> SemiMonthlyLakeTemps.txt
 
+DB: Looks good.
+
 6. 
 grep -E "(20\:00).+" 2009Measurements.txt >> NightTimeLakeTemps.txt
 grep -E "(06\:00).+" 2009Measurements.txt >> NightTimeLakeTemps.txt
+
+DB: What about times in between 20:00 and 6:00?
 
 7. 
  grep -E "(\d+\-\d+\-\d+).(\d\d:\d\d)\t(\d+\.\d+)\t+(\d+\.\d+)" 2009Measurements.txt >> depth_0.3m.txt
@@ -32,3 +42,5 @@ grep -E "(06\:00).+" 2009Measurements.txt >> NightTimeLakeTemps.txt
  grep -E "(\d+\-\d+\-\d+).(\d\d:\d\d)\t(\d+\.\d+)\t+(\d+\.\d+).(\d+\.\d+).(\d+\.\d+)" 2009Measurements.txt >> depth_1.0m.txt
  grep -E "(\d+\-\d+\-\d+).(\d\d:\d\d)\t(\d+\.\d+)\t+(\d+\.\d+).(\d+\.\d+).(\d+\.\d+).(\d+\.\d+)" 2009Measurements.txt >> depth_3.0m.txt
  grep -E "(\d+\-\d+\-\d+).(\d\d:\d\d)\t(\d+\.\d+)\t+(\d+\.\d+).(\d+\.\d+).(\d+\.\d+).(\d+\.\d+).(\d+\.\d+)" 2009Measurements.txt >> depth_5.0m.txt
+
+DB: I like this approach, but how could you select only the column that corresponds to each depth?
