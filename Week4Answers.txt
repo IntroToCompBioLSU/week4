@@ -1,0 +1,16 @@
+1. The data for 091015-100602 show no date for columns IH 0.5 onward
+2. all expressions for #2 were repeated for all three data sets
+  a. sed -i"backup" 's/;/\t/g' Strdln_Twater_091015-100602_corrd.csv
+  b. Find ( ) Replace NaN (Blank spaces are still in the files becase they are tabs or line endings)
+  c. Find \n($) Replace (nothing)
+  d. Find (\w+_\d+\.\d+) Replace $1_
+  e. Find ^NaN Replace (nothing) *just clicked find all then replace all*
+  f. Find (\d\.\d)\d+ Replace $1
+3. grep 2009 Strdln_Twater_090611-090828_corrd.csv >> 2009Samples.txt
+      - did this for all three files and input them into 2009Samples.txt
+4.  grep 2009 Strdln_Twater_090611-090828_corrd.csv Strdln_Twater_090829-091012_corrd.csv Strdln_Twater_091015-100602_corrd.csv >> completeLakeTemps.txt
+5. 1) grep -E "01" Strdln_Twater_090611-090828_corrd.csv Strdln_Twater_090829-091012_corrd.csv Strdln_Twater_091015-100602_corrd.csv >> SemiMonthlyLakeTemps.txt
+   2) grep -E "15" Strdln_Twater_090611-090828_corrd.csv Strdln_Twater_090829-091012_corrd.csv Strdln_Twater_091015-100602_corrd.csv >> SemiMonthlyLakeTemps.txt
+6. grep [20-06]: -n Strdln_Twater_090611-090828_corrd.csv >> NightTimeLakeTemps.txt
+      - this was repeated for each data file (06, 08, 10)
+7. awk '{print $3}' Strdln_Twater_090611-090828_corrd.csv Strdln_Twater_090829-091012_corrd.csv Strdln_Twater_091015-100602_corrd.csv >> depth_0.1m.txt
