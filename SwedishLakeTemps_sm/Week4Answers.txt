@@ -1,14 +1,50 @@
 week 4 answers
 1) The inconsistencies in the data files is that missing data is shown by two or more semicolons and the data does not line up properly with its respective heading.
+
+DB: These are good, but what do you notice about what data is present/missing across the files?
+
 2) -tab-delimited by putting a ';' in the find in buffer and '\t' in the replace section
+
+	DB: Good.
+
    -replaced empty places with NaN by putting '\s\s' in the find in buffer and 'NaN' in the replace section
+   
+   DB: On the right track, but I think it might be better to keep it specific to tabs (and not spaces), using '\t\t'. Also, be sure to keep these when you replace - '\tNaN\t'
+   
    -removed white space at the end of lines by putting '\s$' in find in buffer and '$1' in the replace section
+   
+   DB: Good, but maybe generalize to include multiple spaces or tabs at the end of a line - '\s+$'.
+   
    -Find:- \s replace:- _
+   
+   DB: Right idea, but \s will match tabs as well, which will remove these from between columns. The aim here is just to remove spaces, " ", from inside cells.
+   
    -there were no lines with completely missing data
+   
+   DB: I think there were a few at the end of one of the files. How did you go about looking for them?
+   
    -replaced all numbers with trimmed versions by typing this into find in buffer: (\d+\.)(\d{1})\d+ and this into replace: $1$2
+   
+   DB: Good! A slightly more compact version is (\d+\.\d)\d+ to be replaced by $1.
+   
 3) typed this into terminal:- grep -w '2009' -- Strdln_Twater_090611-090828_corrd_sm.csv Strdln_Twater_090829-091012_corrd_sm.csv Strdln_Twater_091015-100602_corrd_sm.csv | uniq > 2009LakeData.csv
+
+DB: Good idea, but what if there are numbers other than the year that could take the value 2009?
+
 4) grep -v "NaN" Strdln_Twater_090611-090828_corrd_sm.csv Strdln_Twater_090829-091012_corrd_sm.csv Strdln_Twater_091015-100602_corrd_sm.csv
  >> completeLakeTemps.csv
+ 
+ DB: Good! Minor, but this will put multiple header lines into the output file.
+ 
 5) curl 2009-[01-12]-[01-15] Strdln_Twater_090611-090828_corrd_sm.csv Strdln_Twater_090829-091012_corrd_sm.csv Strdln_Twater_091015-100602_corrd_sm.csv >> SemiMonthlyLakeTemps.txt
+
+DB: I think you mean grep, not curl, right? Also, I'm not sure this pattern will work to extract only the 1st and the 15th.
+
 6) grep -E '([0-6]|2[0-3]):([0-5][0-9])' Strdln_Twater_090611-090828_corrd_sm.csv Strdln_Twater_090829-091012_corrd_sm.csv Strdln_Twater_091015-100602_corrd_sm.csv >> NightTimeLakeTemps.txt
+
+DB: Close! But this will also match times from 10:00-20:00, I think.
+
 7) awk '{print $3}' Strdln_Twater_090611-090828_corrd_sm.csv Strdln_Twater_090829-091012_corrd_sm.csv Strdln_Twater_091015-100602_corrd_sm.csv >> depth_0.1.txt
+
+DB: Good. Could also include first column, to keep dates and times paired with these measurements.
+
