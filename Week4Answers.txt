@@ -29,7 +29,7 @@ DB: Good.
   
   `sed -i"backup" 's/ *$//g' Strdln_Twater_090611-090828_corrd.csv Strdln_Twater_090829-091012_corrd.csv Strdln_Twater_091015-100602_corrd.csv`
   
-  DB: Right idea, but what about tabs? Maybe try: '[[:space:]]+$' (sed doesn't like \s).
+  DB: Right idea, but what about tabs? Maybe try: '\s+$'.
   
   - Our program does not like spaces in any of its headers or fields. Replace spaces with underscores (_).
   
@@ -47,7 +47,7 @@ DB: Good.
   
 `sed 's/\d+\.\d+/\d+\.\d{1}/g' Strdln_Twater_090611-090828_corrd.csv` Tried this but don't think it worked.
 
-DB: Good idea, but a couple of things: You'll need to set up the regex to capture the relevant parts of the number - sort of like this (\d+\.\d)\d+. However, sed doesn't like \d, so you'll need to use [[:digit:]] instead -- ([[:digit:]]+\.\[[:digit:]])[[:digit:]]+. Super easy to read, right?!
+DB: Good idea, but a couple of things: You'll need to set up the regex to capture the relevant parts of the number - sort of like this (\d+\.\d)\d+.
 
 3. We also need one file that contains all measurements (from all input files) with samples from 2009. What is a series of Terminal commands (should only take 2 or 3) to create a new file with all 2009 measurements. This file should still have one header line at the top (and none elsewhere in the file). Save the commands you use to do
 
