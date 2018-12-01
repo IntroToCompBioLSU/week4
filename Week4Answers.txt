@@ -1,23 +1,55 @@
 1. Twater- 0910 doe not have any information for MH .1 and .3 (C and D) columns. There is 7m for MH and not IH recorded. 9/10 has significantly lower data for MH 0.5m and .1 columns E and F which are not as similar as E and F columns for 9/08 and 9/06. 9/08 and 9/06 also have blocked (empty rows under G,H,I columns that 9/10 doesnt have. 9/10 also has columns L and M blank and R-- blank. NOPQ have low numbers in 4's (3-5) while 9/6 and 9/8 have N, O columns in 12's. 9/8 P&Q is also 10- 12's. 9/6 P and Q ranges from 7-10
 
-2.\; --> \t in atom-- crashed -- terminal sed -i"_backup0906" 's/;/t/g' ~/Desktop/week4/SwedishLakeTemps/Strdln_Twater_0906.csv
-	sed -i"_backup0906" 's/t/NaN/g' ~/aw@Desktop/week4/SwedishLakeTemps/Strdln_Twater_0906.csv
-		sed -i"_backup0906" 's/^/\_/g' ~/Desktop/week4/SwedishLakeTemps/Strdln_Twater_0906.csv
+DB: Good.
+
+2.\; --> \t in atom-- crashed -- terminal
+
+sed -i"_backup0906" 's/;/t/g' ~/Desktop/week4/SwedishLakeTemps/Strdln_Twater_0906.csv
+	
+DB: You'll need to use \t in the replacement string, instead of just t.
+	
+sed -i"_backup0906" 's/t/NaN/g' ~/Desktop/week4/SwedishLakeTemps/Strdln_Twater_0906.csv
+	
+DB: As above, make sure to escape the t when you indicate a tab - \t. Also, empty cells will be surrounded by two tabs: \t\t --> \tNaN\t 	
+	
+sed -i"_backup0906" 's/^/\_/g' ~/Desktop/week4/SwedishLakeTemps/Strdln_Twater_0906.csv
+
+DB: I believe this will add an underscore to the beginning of every line. Are you aiming to remove whitespace from line ends? If so, you'll need to use something like 's/\s+$//g'
 
 Atom \s--> _
+
+DB: Be careful with this. \s will match both spaces and tabs. If you've already converted your file to be tab delimited, you will end up replacing the tabs with underscores.
+
 atom NaNNaNNaNNaNNaNNaNNaNNaNNaN-> (blank)
+
+DB: Right idea, but remember the tabs in between the fields.
+
 (\d+\.)(\d{1})\d+--> $1$2
 
+DB: Good! A slightly more compact version would be: (\d+\.\d)\d+ --> $1.
+
 3. $ grep 2009 Strdln_Twater_0910.csv >> 2009Samples.csv
+
+DB: This will probably work, but it's a little risky if you have values other than years that could be 2009.
+
 grep 2009 Strdln_Twater_0906.csv >> CompleteLakeTemps.txt
+
+DB: Is this for #4? You'll need to specifically try to remove lines with NaN values to generate a complete dataset.
+
 5.curl 2009-[01-12]-[01-15] Strdln_Twater_0906.csv >> SemiMonthlyLakeTemps.txt
+
+DB: Do you mean grep instead of curl? Also, I'm not sure that this will specifically extract the 1st and 15th of the month.
+
 6. compbio@ubuntu:~/Desktop/week4/SwedishLakeTemps$ echo "nightimelaketemps" >> NightTimeLakeTemps.txt
 compbio@ubuntu:~/Desktop/week4/SwedishLakeTemps$ grep [20-06]: -n Strdln_Twater_0906.csv >> NightTimeLakeTemps.txt
 compbio@ubuntu:~/Desktop/week4/SwedishLakeTemps$ grep [20-06]: -n Strdln_Twater_0908.csv >> NightTimeLakeTemps.txt
 compbio@ubuntu:~/Desktop/week4/SwedishLakeTemps$ grep [20-06]: -n Strdln_Twater_0910.csv >> NightTimeLakeTemps.txt
+
+DB: On the right track, but I'm not sure that this syntax will work.
+
 7.Awk ‘{print $3}’ Strln_Twater_0906.txt ETC. >> depth_0.1m.txt
 
-
+DB: Good.
 
 
 
