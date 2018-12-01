@@ -1,16 +1,52 @@
 1. The data for 091015-100602 show no date for columns IH 0.5 onward
+
+DB: Good. Anything else? Are the same set of measurements in all three files?
+
 2. all expressions for #2 were repeated for all three data sets
   a. sed -i"backup" 's/;/\t/g' Strdln_Twater_091015-100602_corrd.csv
+  
+  DB: Good.
+  
   b. Find ( ) Replace NaN (Blank spaces are still in the files becase they are tabs or line endings)
+  
+  DB: I don't think you want to replace blank spaces here, because these could occur in the middle of other text in cells. Empty cells will be indicated by '\t\t'.
+  
   c. Find \n($) Replace (nothing)
+  
+  DB: \n will only replace line breaks. Maybe try \s+$?
+  
   d. Find (\w+_\d+\.\d+) Replace $1_
+  
+  DB: Is this to replace spaces? I'm not sure what your intended target pattern is here.
+  
   e. Find ^NaN Replace (nothing) *just clicked find all then replace all*
+  
+  DB: This will replace NaNs that occur at the beginning of a line, but what about lines of multiple NaNs?
+  
   f. Find (\d\.\d)\d+ Replace $1
+  
+  DB: Good!
+  
 3. grep 2009 Strdln_Twater_090611-090828_corrd.csv >> 2009Samples.txt
       - did this for all three files and input them into 2009Samples.txt
+      
+DB: Good idea, but what happens if the value 2009 occurs in places in the file other than the year?
+      
 4.  grep 2009 Strdln_Twater_090611-090828_corrd.csv Strdln_Twater_090829-091012_corrd.csv Strdln_Twater_091015-100602_corrd.csv >> completeLakeTemps.txt
+
+DB: How should this find complete lines? You need to target lines that don't have NaNs.
+
 5. 1) grep -E "01" Strdln_Twater_090611-090828_corrd.csv Strdln_Twater_090829-091012_corrd.csv Strdln_Twater_091015-100602_corrd.csv >> SemiMonthlyLakeTemps.txt
    2) grep -E "15" Strdln_Twater_090611-090828_corrd.csv Strdln_Twater_090829-091012_corrd.csv Strdln_Twater_091015-100602_corrd.csv >> SemiMonthlyLakeTemps.txt
+   
+DB: Right idea, but the values 01 and 15 could occur many places in the file. How might you specifically target them as the days of the month?
+   
 6. grep [20-06]: -n Strdln_Twater_090611-090828_corrd.csv >> NightTimeLakeTemps.txt
       - this was repeated for each data file (06, 08, 10)
+      
+DB: As above, you're going to need to be more specific with your pattern to target these times.
+      
 7. awk '{print $3}' Strdln_Twater_090611-090828_corrd.csv Strdln_Twater_090829-091012_corrd.csv Strdln_Twater_091015-100602_corrd.csv >> depth_0.1m.txt
+
+DB: Good. You could also put the dates and times in the file, so that those values remain paired with the temperatures.
+
